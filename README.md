@@ -1,9 +1,53 @@
-# Sanity Clean Content Studio
+# mrchasp-core
 
-Congratulations, you have now installed the Sanity Content Studio, an open-source real-time content editing environment connected to the Sanity backend.
+Contrato de datos de MrChasp: un Sanity Studio con el esquema mínimo que consumen todas las webs de `*.mrchasp.com`.
 
-Now you can do the following things:
+- Studio: https://core.mrchasp.com (Vercel, proyecto `mrchasp-core`)
+- Sanity: proyecto `6wzh28a3`, dataset `production` (lectura pública)
+- Imágenes: Cloudinary (`cloudinary.asset`). Las credenciales se configuran desde el Studio, nunca en el código.
 
-- [Read “getting started” in the docs](https://www.sanity.io/docs/introduction/getting-started?utm_source=readme)
-- [Join the Sanity community](https://www.sanity.io/community/join?utm_source=readme)
-- [Extend and build plugins](https://www.sanity.io/docs/content-studio/extending?utm_source=readme)
+## Tipos
+
+| Tipo | Descripción |
+| --- | --- |
+| `profile` | Documento único (`_id: profile`): usuario, alias, nombre, bio e imágenes |
+| `channel` | Redes y contacto |
+| `site` | Webs de `*.mrchasp.com` con sus colores |
+| `project` | Proyectos |
+| `feedItem` | Publicaciones agregadas de otras fuentes |
+
+Las variantes del nombre (short, common, display, full) no se guardan: se derivan en las consultas o en las webs.
+
+## Desarrollo
+
+```sh
+pnpm install
+pnpm dev          # Studio en http://localhost:3333
+pnpm biome check  # lint y formato
+pnpm typegen      # extrae el esquema y regenera sanity.types.ts
+```
+
+`.env` (local, fuera del repo) y Vercel guardan `SANITY_API_WRITE_TOKEN`.
+
+## Añadir un campo
+
+1. Añade el `defineField` al tipo en `schemaTypes/<tipo>.ts`.
+2. `pnpm typegen` y versiona `sanity.types.ts`.
+3. Redespliega (ver abajo).
+
+## Añadir un tipo
+
+1. Crea `schemaTypes/<tipo>.ts` con `defineType`.
+2. Regístralo en `schemaTypes/index.ts`.
+3. `pnpm typegen` y redespliega.
+
+## Añadir un idioma
+
+Añádelo a `locales` en `schemaTypes/locales.ts`. Los tipos `localeString` y `localeText` se generan a partir de esa constante. Después `pnpm typegen` y redespliega.
+
+## Redesplegar
+
+```sh
+pnpm schema:deploy  # publica el esquema en Sanity
+git push            # Vercel despliega el Studio desde main
+```

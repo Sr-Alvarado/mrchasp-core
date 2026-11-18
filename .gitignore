@@ -31,5 +31,5 @@
 # Typegen input
 /schema.json
 
-# Env
-.env
+.vercel
+.env*
