@@ -3,7 +3,7 @@ import {defineConfig} from 'sanity'
 import {structureTool} from 'sanity/structure'
 import {cloudinarySchemaPlugin} from 'sanity-plugin-cloudinary'
 import {schemaTypes} from './schemaTypes'
-import {profile} from './schemaTypes/profile'
+import {singletonTypes} from './singletonTypes'
 import {structure} from './structure'
 
 const singletonActions = new Set(['publish', 'discardChanges', 'restore'])
@@ -16,11 +16,11 @@ export default defineConfig({
   plugins: [structureTool({structure}), visionTool(), cloudinarySchemaPlugin()],
   schema: {
     types: schemaTypes,
-    templates: (templates) => templates.filter(({schemaType}) => schemaType !== profile.name),
+    templates: (templates) => templates.filter(({schemaType}) => !singletonTypes.has(schemaType)),
   },
   document: {
     actions: (actions, {schemaType}) =>
-      schemaType === profile.name
+      singletonTypes.has(schemaType)
         ? actions.filter(({action}) => action && singletonActions.has(action))
         : actions,
   },

@@ -126,6 +126,30 @@ export type Channel = {
   showInHero?: boolean;
 };
 
+export type Theme = {
+  _id: string;
+  _type: "theme";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  light?: Palette;
+  dark?: Palette;
+};
+
+export type Palette = {
+  _type: "palette";
+  bg?: string;
+  surface?: string;
+  ink?: string;
+  inkMuted?: string;
+  line?: string;
+  accent?: string;
+  accentText?: string;
+  onAccent?: string;
+  focus?: string;
+  activity?: Array<string>;
+};
+
 export type Profile = {
   _id: string;
   _type: "profile";
@@ -292,6 +316,8 @@ export type AllSanitySchemaTypes =
   | Slug
   | Site
   | Channel
+  | Theme
+  | Palette
   | Profile
   | CloudinaryAssetContextCustom
   | CloudinaryAssetContext

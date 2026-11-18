@@ -1,13 +1,12 @@
 import type {StructureResolver} from 'sanity/structure'
-import {profile} from './schemaTypes/profile'
+import {singletonTypes} from './singletonTypes'
 
 export const structure: StructureResolver = (S) =>
   S.list()
     .title('Content')
     .items([
-      S.listItem()
-        .title('Profile')
-        .id(profile.name)
-        .child(S.document().schemaType(profile.name).documentId(profile.name)),
-      ...S.documentTypeListItems().filter((item) => item.getId() !== profile.name),
+      ...[...singletonTypes].map((name) =>
+        S.documentTypeListItem(name).child(S.document().schemaType(name).documentId(name)),
+      ),
+      ...S.documentTypeListItems().filter((item) => !singletonTypes.has(item.getId() ?? '')),
     ])

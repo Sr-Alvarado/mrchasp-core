@@ -8,13 +8,14 @@ Contrato de datos de MrChasp: un Sanity Studio con el esquema mínimo que consum
 
 ## Tipos
 
-| Tipo       | Descripción                                                              |
-| ---------- | ------------------------------------------------------------------------ |
-| `profile`  | Documento único (`_id: profile`): usuario, alias, nombre, bio e imágenes |
-| `channel`  | Redes y contacto                                                         |
-| `site`     | Webs de `*.mrchasp.com` con sus colores                                  |
-| `project`  | Proyectos                                                                |
-| `feedItem` | Publicaciones agregadas de otras fuentes                                 |
+| Tipo       | Descripción                                                                                              |
+| ---------- | -------------------------------------------------------------------------------------------------------- |
+| `profile`  | Documento único (`_id: profile`): usuario, alias, nombre, bio e imágenes                                 |
+| `theme`    | Documento único (`_id: theme`): paletas `light` y `dark` (tipo `palette`) compartidas por todas las webs |
+| `channel`  | Redes y contacto                                                                                         |
+| `site`     | Webs de `*.mrchasp.com` con sus colores                                                                  |
+| `project`  | Proyectos                                                                                                |
+| `feedItem` | Publicaciones agregadas de otras fuentes                                                                 |
 
 Las variantes del nombre (short, common, display, full) no se guardan: se derivan en las consultas o en las webs.
 
@@ -39,7 +40,8 @@ pnpm typegen      # extrae el esquema y regenera sanity.types.ts
 
 1. Crea `schemaTypes/<tipo>.ts` con `defineType`.
 2. Regístralo en `schemaTypes/index.ts`.
-3. `pnpm typegen` y redespliega.
+3. Si debe ser un documento único, añádelo a `singletonTypes.ts` y crea el documento con `_id` igual al nombre del tipo.
+4. `pnpm typegen` y redespliega.
 
 ## Añadir un idioma
 
