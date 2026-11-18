@@ -14,7 +14,6 @@
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "sanity": "^6.24.0",
-    "sanity-plugin-cloudinary": "^2.1.10",
     "styled-components": "^6.1.18"
   },
   "devDependencies": {

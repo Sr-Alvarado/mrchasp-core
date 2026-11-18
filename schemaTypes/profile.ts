@@ -37,7 +37,7 @@ export const profile = defineType({
               type: 'string',
               options: {list: ['avatar', 'cover', 'cutout', 'og']},
             }),
-            defineField({name: 'image', type: 'cloudinary.asset'}),
+            defineField({name: 'image', type: 'image', options: {hotspot: true}}),
           ],
         }),
       ],

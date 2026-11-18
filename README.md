@@ -4,7 +4,7 @@ Contrato de datos de MrChasp: un Sanity Studio con el esquema mínimo que consum
 
 - Studio: https://core.mrchasp.com (Vercel, proyecto `mrchasp-core`)
 - Sanity: proyecto `6wzh28a3`, dataset `production` (lectura pública)
-- Imágenes: Cloudinary (`cloudinary.asset`). Las credenciales se configuran desde el Studio, nunca en el código.
+- Imágenes: tipo `image` nativo de Sanity con hotspot, almacenadas en el dataset.
 
 ## Tipos
 

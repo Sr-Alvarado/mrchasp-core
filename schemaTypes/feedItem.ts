@@ -11,7 +11,7 @@ export const feedItem = defineType({
     }),
     defineField({name: 'title', type: 'string'}),
     defineField({name: 'text', type: 'text'}),
-    defineField({name: 'image', type: 'cloudinary.asset'}),
+    defineField({name: 'image', type: 'image', options: {hotspot: true}}),
     defineField({name: 'url', type: 'url'}),
     defineField({name: 'publishedAt', type: 'datetime'}),
   ],

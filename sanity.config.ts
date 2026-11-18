@@ -1,7 +1,6 @@
 import {visionTool} from '@sanity/vision'
 import {defineConfig} from 'sanity'
 import {structureTool} from 'sanity/structure'
-import {cloudinarySchemaPlugin} from 'sanity-plugin-cloudinary'
 import {schemaTypes} from './schemaTypes'
 import {singletonTypes} from './singletonTypes'
 import {structure} from './structure'
@@ -13,7 +12,7 @@ export default defineConfig({
   title: 'MrChasp Core',
   projectId: '6wzh28a3',
   dataset: 'production',
-  plugins: [structureTool({structure}), visionTool(), cloudinarySchemaPlugin()],
+  plugins: [structureTool({structure}), visionTool()],
   schema: {
     types: schemaTypes,
     templates: (templates) => templates.filter(({schemaType}) => !singletonTypes.has(schemaType)),

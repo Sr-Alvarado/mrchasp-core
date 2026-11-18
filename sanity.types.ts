@@ -15,6 +15,13 @@
 export declare const internalGroqTypeReferenceTo: unique symbol;
 
 // Source: schema.json
+export type SanityImageAssetReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+};
+
 export type FeedItem = {
   _id: string;
   _type: "feedItem";
@@ -24,34 +31,31 @@ export type FeedItem = {
   source?: "instagram" | "bluesky" | "blog" | "brain" | "lab" | "talks";
   title?: string;
   text?: string;
-  image?: CloudinaryAsset;
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
   url?: string;
   publishedAt?: string;
 };
 
-export type CloudinaryAsset = {
-  _type: "cloudinary.asset";
-  id?: string;
-  public_id?: string;
-  resource_type?: string;
-  type?: string;
-  format?: string;
-  version?: number;
-  url?: string;
-  secure_url?: string;
-  width?: number;
+export type SanityImageCrop = {
+  _type: "sanity.imageCrop";
+  top?: number;
+  bottom?: number;
+  left?: number;
+  right?: number;
+};
+
+export type SanityImageHotspot = {
+  _type: "sanity.imageHotspot";
+  x?: number;
+  y?: number;
   height?: number;
-  bytes?: number;
-  duration?: number;
-  tags?: Array<string>;
-  created_at?: string;
-  derived?: Array<
-    {
-      _key: string;
-    } & CloudinaryAssetDerived
-  >;
-  access_mode?: string;
-  context?: CloudinaryAssetContext;
+  width?: number;
 };
 
 export type Project = {
@@ -66,11 +70,14 @@ export type Project = {
   description?: LocaleText;
   status?: "live" | "beta" | "paused" | "archived";
   stack?: Array<string>;
-  images?: Array<
-    {
-      _key: string;
-    } & CloudinaryAsset
-  >;
+  images?: Array<{
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+    _key: string;
+  }>;
   links?: Array<{
     label?: LocaleString;
     url?: string;
@@ -171,27 +178,15 @@ export type Profile = {
   };
   images?: Array<{
     role?: "avatar" | "cover" | "cutout" | "og";
-    image?: CloudinaryAsset;
+    image?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
     _key: string;
   }>;
-};
-
-export type CloudinaryAssetContextCustom = {
-  _type: "cloudinary.assetContextCustom";
-  alt?: string;
-  caption?: string;
-};
-
-export type CloudinaryAssetContext = {
-  _type: "cloudinary.assetContext";
-  custom?: CloudinaryAssetContextCustom;
-};
-
-export type CloudinaryAssetDerived = {
-  _type: "cloudinary.assetDerived";
-  raw_transformation?: string;
-  url?: string;
-  secure_url?: string;
 };
 
 export type SanityImagePaletteSwatch = {
@@ -230,22 +225,6 @@ export type SanityImageMetadata = {
   thumbHash?: string;
   hasAlpha?: boolean;
   isOpaque?: boolean;
-};
-
-export type SanityImageHotspot = {
-  _type: "sanity.imageHotspot";
-  x?: number;
-  y?: number;
-  height?: number;
-  width?: number;
-};
-
-export type SanityImageCrop = {
-  _type: "sanity.imageCrop";
-  top?: number;
-  bottom?: number;
-  left?: number;
-  right?: number;
 };
 
 export type SanityFileAsset = {
@@ -308,8 +287,10 @@ export type Geopoint = {
 };
 
 export type AllSanitySchemaTypes =
+  | SanityImageAssetReference
   | FeedItem
-  | CloudinaryAsset
+  | SanityImageCrop
+  | SanityImageHotspot
   | Project
   | LocaleString
   | LocaleText
@@ -319,15 +300,10 @@ export type AllSanitySchemaTypes =
   | Theme
   | Palette
   | Profile
-  | CloudinaryAssetContextCustom
-  | CloudinaryAssetContext
-  | CloudinaryAssetDerived
   | SanityImagePaletteSwatch
   | SanityImagePalette
   | SanityImageDimensions
   | SanityImageMetadata
-  | SanityImageHotspot
-  | SanityImageCrop
   | SanityFileAsset
   | SanityAssetSourceData
   | SanityImageAsset

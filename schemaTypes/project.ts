@@ -17,7 +17,7 @@ export const project = defineType({
     defineField({
       name: 'images',
       type: 'array',
-      of: [defineArrayMember({type: 'cloudinary.asset'})],
+      of: [defineArrayMember({type: 'image', options: {hotspot: true}})],
     }),
     defineField({
       name: 'links',
