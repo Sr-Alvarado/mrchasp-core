@@ -118,6 +118,25 @@ export type Site = {
   colorDark?: string;
   description?: LocaleString;
   order?: number;
+  seoTitle?: LocaleString;
+  ui?: {
+    home?: LocaleString;
+    now?: LocaleString;
+    nowTitle?: LocaleString;
+    contact?: LocaleString;
+    viewCv?: LocaleString;
+    contactMe?: LocaleString;
+    sections?: LocaleString;
+    channels?: LocaleString;
+    language?: LocaleString;
+    theme?: LocaleString;
+    status?: {
+      live?: LocaleString;
+      beta?: LocaleString;
+      paused?: LocaleString;
+      archived?: LocaleString;
+    };
+  };
 };
 
 export type Channel = {

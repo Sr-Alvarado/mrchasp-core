@@ -1,4 +1,5 @@
 import {defineArrayMember, defineField, defineType} from 'sanity'
+import {projectStatuses} from './projectStatuses'
 
 export const project = defineType({
   name: 'project',
@@ -11,7 +12,7 @@ export const project = defineType({
     defineField({
       name: 'status',
       type: 'string',
-      options: {list: ['live', 'beta', 'paused', 'archived']},
+      options: {list: projectStatuses},
     }),
     defineField({name: 'stack', type: 'array', of: [defineArrayMember({type: 'string'})]}),
     defineField({
