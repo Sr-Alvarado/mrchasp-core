@@ -112,7 +112,7 @@ export type Site = {
   _updatedAt: string;
   _rev: string;
   key?: "root" | "lab" | "talks" | "blog" | "brain" | "cv" | "links";
-  name?: string;
+  name?: LocaleString;
   url?: string;
   colorLight?: string;
   colorDark?: string;
@@ -131,6 +131,9 @@ export type Site = {
     channels?: LocaleString;
     language?: LocaleString;
     theme?: LocaleString;
+    notFoundTitle?: LocaleString;
+    notFoundText?: LocaleString;
+    backHome?: LocaleString;
     status?: {
       live?: LocaleString;
       beta?: LocaleString;

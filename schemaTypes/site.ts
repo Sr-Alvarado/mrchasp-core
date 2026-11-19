@@ -14,6 +14,9 @@ const uiLabels = [
   'channels',
   'language',
   'theme',
+  'notFoundTitle',
+  'notFoundText',
+  'backHome',
 ]
 
 const localeStringFields = (names: string[]) =>
@@ -30,7 +33,7 @@ export const site = defineType({
       type: 'string',
       options: {list: ['root', 'lab', 'talks', 'blog', 'brain', 'cv', 'links']},
     }),
-    defineField({name: 'name', type: 'string'}),
+    defineField({name: 'name', type: 'localeString'}),
     defineField({name: 'url', type: 'url'}),
     defineField({name: 'colorLight', type: 'string', validation: (rule) => rule.regex(hexColor)}),
     defineField({name: 'colorDark', type: 'string', validation: (rule) => rule.regex(hexColor)}),
@@ -56,4 +59,5 @@ export const site = defineType({
       ],
     }),
   ],
+  preview: {select: {title: 'name.es', subtitle: 'key'}},
 })
