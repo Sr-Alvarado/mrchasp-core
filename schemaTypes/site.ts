@@ -42,6 +42,11 @@ export const site = defineType({
       hidden: ({document}) => document?.key !== 'root',
     }),
     defineField({
+      name: 'umamiWebsiteId',
+      type: 'string',
+      hidden: ({document}) => document?.key !== 'root',
+    }),
+    defineField({
       name: 'ui',
       type: 'object',
       hidden: ({document}) => document?.key !== 'root',

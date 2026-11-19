@@ -119,6 +119,7 @@ export type Site = {
   description?: LocaleString;
   order?: number;
   seoTitle?: LocaleString;
+  umamiWebsiteId?: string;
   ui?: {
     home?: LocaleString;
     now?: LocaleString;
