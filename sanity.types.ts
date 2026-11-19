@@ -195,6 +195,12 @@ export type Profile = {
     medium?: LocaleText;
     long?: LocaleText;
   };
+  jobTitle?: LocaleString;
+  knowsAbout?: Array<
+    {
+      _key: string;
+    } & LocaleString
+  >;
   images?: Array<{
     role?: "avatar" | "cover" | "cutout" | "og";
     image?: {

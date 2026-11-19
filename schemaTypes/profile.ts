@@ -25,6 +25,12 @@ export const profile = defineType({
         defineField({name: 'long', type: 'localeText'}),
       ],
     }),
+    defineField({name: 'jobTitle', type: 'localeString'}),
+    defineField({
+      name: 'knowsAbout',
+      type: 'array',
+      of: [defineArrayMember({type: 'localeString'})],
+    }),
     defineField({
       name: 'images',
       type: 'array',
