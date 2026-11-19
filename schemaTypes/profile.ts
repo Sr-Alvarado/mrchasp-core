@@ -37,7 +37,18 @@ export const profile = defineType({
               type: 'string',
               options: {list: ['avatar', 'cover', 'cutout', 'og']},
             }),
-            defineField({name: 'image', type: 'image', options: {hotspot: true}}),
+            defineField({
+              name: 'image',
+              type: 'image',
+              options: {hotspot: true},
+              fields: [
+                defineField({
+                  name: 'alt',
+                  type: 'localeString',
+                  validation: (rule) => rule.required(),
+                }),
+              ],
+            }),
           ],
         }),
       ],

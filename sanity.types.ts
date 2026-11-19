@@ -202,6 +202,7 @@ export type Profile = {
       media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
+      alt?: LocaleString;
       _type: "image";
     };
     _key: string;
